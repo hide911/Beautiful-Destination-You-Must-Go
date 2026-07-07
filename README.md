@@ -1,7 +1,5 @@
 # Beautiful-Destination-You-Must-Go
 
-# World Destination You Must Go
-
 A simple and beautiful website showcasing amazing travel destinations around the world.
 
 ## Features
