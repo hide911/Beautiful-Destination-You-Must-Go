@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Destination You Must Go</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(90deg, #2c3e50, #3498db);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav h1 {
+            color: white;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200&h=400&fit=crop');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section */
+        section {
+            padding: 3rem 2rem;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        /* Places Grid */
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .place-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .place-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .place-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .place-info {
+            padding: 1.5rem;
+        }
+
+        .place-info h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .place-country {
+            color: #3498db;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .place-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .place-rating {
+            color: #f39c12;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .visit-btn {
+            background: #3498db;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .visit-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Categories */
+        .categories {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            background: #ecf0f1;
+            border: 2px solid #3498db;
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: #3498db;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .places-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <h1>World Destination You Must Go</h1>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <h1>Explore Amazing Places</h1>
+            <p>Discover the world's most beautiful destinations</p>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section>
+        <div class="container">
+            <h2>Choose Your Adventure</h2>
+            <div class="categories">
+                <button class="category-btn active" onclick="filterPlaces('all')">All Places</button>
+                <button class="category-btn" onclick="filterPlaces('beach')">Beaches</button>
+                <button class="category-btn" onclick="filterPlaces('mountain')">Mountains</button>
+                <button class="category-btn" onclick="filterPlaces('city')">Cities</button>
+                <button class="category-btn" onclick="filterPlaces('nature')">Nature</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Places Grid -->
+    <section>
+        <div class="container">
+            <div class="places-grid" id="placesGrid">
+                <!-- Places will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 World Destination You Must Go. All rights reserved.</p>
+        <p>Explore | Discover | Travel</p>
+    </footer>
+
+    <script>
+        // Places data
+        const places = [
+            {
+                id: 1,
+                name: "Paris",
+                country: "France",
+                category: "city",
+                description: "The city of love with iconic Eiffel Tower, museums, and romantic streets.",
+                rating: "4.9/5",
+                image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&h=250&fit=crop"
+            },
+            {
+                id: 2,
+                name: "Bali",
+                country: "Indonesia",
+                category: "beach",
+                description: "Tropical paradise with beautiful beaches, temples, and rice terraces.",
+                rating: "4.8/5",
+                image: "https://images.unsplash.com/photo-1537225228614-b4fad34a0b60?w=400&h=250&fit=crop"
+            },
+            {
+                id: 3,
+                name: "Swiss Alps",
+                country: "Switzerland",
+                category: "mountain",
+                description: "Stunning mountain peaks with pristine snow and breathtaking views.",
+                rating: "4.9/5",
+                image: "https://images.unsplash.com/photo-1531371341769-969ba06ddc1d?w=400&h=250&fit=crop"
+            },
+            {
+                id: 4,
+                name: "Amazon Rainforest",
+                country: "Brazil",
+                category: "nature",
+                description: "World's largest rainforest with incredible biodiversity and wildlife.",
+                rating: "4.7/5",
+                image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400&h=250&fit=crop"
+            },
+            {
+                id: 5,
+                name: "Maldives",
+                country: "Maldives",
+                category: "beach",
+                description: "Crystal clear waters, white sandy beaches, and luxury resorts.",
+                rating: "4.9/5",
+                image: "https://images.unsplash.com/photo-1514282401047-7e6e5d46f2d5?w=400&h=250&fit=crop"
+            },
+            {
+                id: 6,
+                name: "Rocky Mountains",
+                country: "Canada",
+                category: "mountain",
+                description: "Majestic mountains with crystal lakes and outdoor adventures.",
+                rating: "4.8/5",
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop"
+            },
+            {
+                id: 7,
+                name: "Tokyo",
+                country: "Japan",
+                category: "city",
+                description: "Modern metropolis blending ancient traditions with cutting-edge technology.",
+                rating: "4.7/5",
+                image: "https://images.unsplash.com/photo-1540959375944-7049f642e9f1?w=400&h=250&fit=crop"
+            },
+            {
+                id: 8,
+                name: "Great Barrier Reef",
+                country: "Australia",
+                category: "nature",
+                description: "World's largest coral reef system with vibrant marine life.",
+                rating: "4.8/5",
+                image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=250&fit=crop"
+            },
+            {
+                id: 9,
+                name: "New York City",
+                country: "USA",
+                category: "city",
+                description: "The city that never sleeps with iconic skyline and vibrant culture.",
+                rating: "4.6/5",
+                image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400&h=250&fit=crop"
+            },
+            {
+                id: 10,
+                name: "Santorini",
+                country: "Greece",
+                category: "beach",
+                description: "Picturesque island with white buildings, blue domes, and sunset views.",
+                rating: "4.9/5",
+                image: "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=400&h=250&fit=crop"
+            }
+        ];
+
+        // Display places
+        function displayPlaces(filtered = places) {
+            const grid = document.getElementById('placesGrid');
+            grid.innerHTML = filtered.map(place => `
+                <div class="place-card">
+                    <img src="${place.image}" alt="${place.name}" class="place-image" onerror="this.src='https://via.placeholder.com/400x250?text=${place.name}'">
+                    <div class="place-info">
+                        <h3>${place.name}</h3>
+                        <div class="place-country">Location: ${place.country}</div>
+                        <div class="place-description">${place.description}</div>
+                        <div class="place-rating">Rating: ${place.rating}</div>
+                        <button class="visit-btn">Learn More</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter places by category
+        function filterPlaces(category) {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            if (category === 'all') {
+                displayPlaces(places);
+            } else {
+                const filtered = places.filter(place => place.category === category);
+                displayPlaces(filtered);
+            }
+        }
+
+        // Initial display
+        displayPlaces();
+    </script>
+</body>
+</html>
